@@ -1,0 +1,81 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="/css/login.css">
+
+{{/section}}
+
+{{#if showError}}
+<div class="alert alert-danger">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{{!-- <strong>Sai tên đăng nhập hoặc mật khẩu!</strong>  {{errorMsg}} --}}
+	<p>Sai tên đăng nhập hoặc mật khẩu!</p>
+</div>
+{{/if}}
+
+{{#section 'js'}}
+
+<script type="text/javascript">
+	function kiemTraDangNhap() {
+		if (frmDangNhap.username.value == "") {
+			alert('Mời bạn nhập tên đăng nhập');
+			return false;
+		}
+		if (frmDangNhap.rawPWD.value == "") {
+			alert('Mời bạn nhập password');
+			return false;
+		}
+
+		return true;
+	}
+</script>
+
+{{/section}}
+
+<div class="jumbotron">
+
+	<div class="d-flex align-items-center">
+		<div class="row">
+			<div class="col-sm-7">
+				<form id="frmDangNhap" method="POST" action="" id="frmLogin" class="col-sm-10 mx-auto">
+					<h1 class="text-center">Đăng nhập</h1>
+					<div class="form-group">
+						<label for="txtUsername">Tên đăng nhập:</label>
+						<input type="text" class="form-control" id="txtUsername" placeholder="User Name"
+							name="username">
+					</div>
+
+					<div class="form-group">
+						<label for="txtPWD">Mật khẩu:</label>
+						<input type="password" class="form-control" id="txtPWD" placeholder="Password"
+							name="rawPWD">
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2">
+							<label>
+								<input type="checkbox" name="remember">
+								Ghi nhớ
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="btn btn-warning col-md-offset-4 col-md-8 login"
+							onclick="return kiemTraDangNhap()">Submit</button>
+					</div>
+
+					<div class="NotAccount text-center">Chưa có tài khoản? <span style="color:blue;cursor:pointer"><a
+								id="dangky" href="/account/register"> Đăng ký.</a><a href="/"> Hoặc về Trang
+								chủ.</a></span>
+					</div>
+
+				</form>
+			</div>
+			<div class="col-sm-5">
+				<div class="motaDN">Đăng nhập để theo dõi đơn hàng, lưu
+					danh sách sản phẩm yêu thích, nhận
+					nhiều ưu đãi hấp dẫn.</div>
+				<img src="/img/graphic-map.png" alt="">
+			</div>
+		</div>
+	</div>
+</div>

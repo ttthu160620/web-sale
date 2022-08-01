@@ -1,0 +1,222 @@
+{{#section 'title'}}
+Đăng ký
+{{/section}}
+
+{{#if showError}}
+<div class="alert alert-success">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>Bạn đã đăng ký tài khoản thành công!</strong>  {{errorMsg}}
+</div>
+{{/if}}
+
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="/assets/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+
+<link rel="stylesheet" type="text/css" href="/css/signup.css">
+
+{{/section}}
+
+
+{{#section 'js'}}
+<!-- jQuery library -->
+
+<script src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+<script type="text/javascript">
+	$('#txtDOB').datepicker({
+		format: 'd/m/yyyy',
+		autoclose: true
+	});
+</script>
+
+<script type="text/javascript">
+	function kiemTraDangKy() {
+		var emptyUsernameMessage = document.getElementById("emptyUsernameMessage");
+		var emptyPasswordMessage = document.getElementById("emptyPasswordMessage");
+		var invalidPasswordMessage = document.getElementById("invalidPasswordMessage");
+		var emptyCPwdMsg = document.getElementById("emptyCPwdMsg");
+		var invalidCPwdMsg = document.getElementById("invalidCPwdMsg");
+		var emptyNameMsg = document.getElementById("emptyNameMsg");
+		var emptyEmailMsg = document.getElementById("emptyEmailMsg");
+		var invalidPasswordMessage = document.getElementById("invalidPasswordMessage");
+		let status =true;
+		//username
+		if (frmDangKy.username.value == "") {
+			emptyUsernameMessage.style.display = "block";
+			emptyUsernameMessage.style.color = "red";
+			emptyUsernameMessage.style.fontSize = "14px";
+			status= false;
+		}
+
+		else {
+			emptyUsernameMessage.style.display = "none";
+		}
+
+		//password
+		if (frmDangKy.rawPWD.value == "") {
+			emptyPasswordMessage.style.display = "block";
+			emptyPasswordMessage.style.color = "red";
+			emptyPasswordMessage.style.fontSize = "14px";
+			status= false;
+
+		}
+
+		else {
+			emptyPasswordMessage.style.display = "none";
+		}
+
+		if (frmDangKy.rawPWD.value.length < 6 && frmDangKy.rawPWD.value.length > 0 ) {
+			invalidPasswordMessage.style.display = "block";
+			invalidPasswordMessage.style.color = "red";
+			invalidPasswordMessage.style.fontSize = "14px";
+			status= false;
+		}
+
+		else {
+			invalidPasswordMessage.style.fontSize = "none";
+		}
+
+		//confirm password
+		if (frmDangKy.cPWD.value == "") {
+			emptyCPwdMsg.style.display = "block";
+			emptyCPwdMsg.style.color = "red";
+			emptyCPwdMsg.style.fontSize = "14px";
+			status= false;
+		}
+		else {
+			emptyCPwdMsg.style.display = "none";
+		}
+
+		//confirm khac pass
+		if (frmDangKy.rawPWD.value != frmDangKy.cPWD.value) {
+			emptyCPwdMsg.style.display = "none";
+			invalidCPwdMsg.style.display = "block";
+			invalidCPwdMsg.style.color = "red";
+			invalidCPwdMsg.style.fontSize = "14px";
+			status= false;
+		}
+		else {
+			invalidCPwdMsg.style.display = "none";
+		}
+
+		//fullname
+		if (frmDangKy.name.value == "") {
+			emptyNameMsg.style.display = "block";
+			emptyNameMsg.style.color = "red";
+			emptyNameMsg.style.fontSize = "14px";
+			status= false;
+		}
+		else {
+			emptyNameMsg.style.display = "none";
+		}
+
+		//email
+			emptyEmailMsg.style.display = "none";
+			invalidEmail.style.display = "none";
+		if (frmDangKy.email.value == "") {
+			emptyEmailMsg.style.display = "block";
+			emptyEmailMsg.style.color = "red";
+			emptyEmailMsg.style.fontSize = "14px";
+			status= false;
+
+		} else {
+			var email = document.getElementById("email");
+				var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+				if (!filter.test(frmDangKy.email.value)) {
+					invalidEmail.style.display = "block";
+					invalidEmail.style.color = "red";
+					invalidEmail.style.fontSize = "14px";
+					status= false;
+				}
+		}
+
+		
+		
+
+		return status;
+	}
+</script>
+
+{{/section}}
+
+
+<div class="jumbotron">
+	<div class="row">
+		<div class="col-sm-7">
+			<form id="frmDangKy" action="" method="POST" role="form" class="col-sm-10 mx-auto">
+				<h1 class="text-center">Đăng ký</h1>
+				<div class="form-group">
+					<label for="txtUsername">Tên đăng nhập:</label>
+
+					<input type="text" class="form-control" id="txtUsername" name="username"
+						placeholder="Tên đăng nhập">
+					<p id="emptyUsernameMessage" style="display:none">Tên đăng nhập không được bỏ trống.</p>
+
+				</div>
+
+				<div class="form-group">
+					<label for="txtPWD">Mật khẩu:</label>
+
+					<input type="password" class="form-control" id="txtPWD" name="rawPWD" placeholder="Mật khẩu">
+					<p id="emptyPasswordMessage" style="display:none">Mật khẩu không được bỏ trống.</p>
+					<p id="invalidPasswordMessage" style="display:none">Mật khẩu phải lớn hơn 6 ký tự.</p>
+
+				</div>
+
+				<div class="form-group">
+					<label for="txtCPWD">Xác nhận mật khẩu:</label>
+
+					<input type="password" class="form-control" id="txtCPWD" name="cPWD"
+						placeholder="Xác nhận mật khẩu">
+					<p id="emptyCPwdMsg" style="display:none">Xác nhận mật khẩu không được bỏ trống. </p>
+					<p id="invalidCPwdMsg" style="display:none">Xác nhận mật khẩu không đúng. Mời bạn nhập lại mật khẩu.</p>
+				</div>
+
+				<div class="form-group">
+					<label for="txtName">Họ tên:</label>
+
+					<input type="text" class="form-control" id="txtName" name="name" placeholder="Họ tên">
+					<p id="emptyNameMsg" style="display:none">Họ tên không được bỏ trống.</p>
+
+				</div>
+				<div class="form-group">
+					<label for="txtEmail">Email:</label>
+
+					<input type="text" class="form-control" id="txtEmail" name="email" placeholder="Email Address">
+					<p id="emptyEmailMsg" style="display:none">Email không được bỏ trống.</p>
+					<p id="invalidEmail" style="display:none">Email không hợp lệ.</p>
+
+				</div>
+
+				<div class="form-group">
+					<label for="txtDOB">Ngày sinh:</label>
+
+					<input type="text" class="form-control" id="txtDOB" placeholder="d/m/yyyy" name="dob" />
+
+				</div>
+
+				<h5 class="noiquyDK">Khi bạn nhấn Đăng ký, bạn đã đồng ý thực hiện mọi giao dịch mua bán theo <span
+						style="color:blue"><a href="#">điều kiện sử dụng và chính sách của chúng tôi.</a></span></h5>
+
+				<div class="form-group">
+
+					<div class="col-md-offset-3 col-md-9">
+						<button id="btn-signup" type="submit" class="btn btn-info SignUp"
+							onclick="return kiemTraDangKy()"><span class="fa fa-user"></span>  Đăng ký</button>
+					</div>
+				</div>
+
+				<div class="have-account">Đã có tài khoản? <span style="color:blue;cursor:pointer"><a id="dangnhap"
+							href="/account/login"> Đăng nhập</a></div>
+			</form>
+		</div>
+		<div class="col-sm-5">
+			<div class="mota">Tạo tài khoản để theo dõi đơn hàng, lưu
+				danh sách sản phẩm yêu thích, nhận
+				nhiều ưu đãi hấp dẫn.</div>
+			<img src="/img/graphic-map.png" alt="" class ="imgRegister">
+		</div>
+	</div>
+</div>
+<!--end row dangky-->
+</div>
