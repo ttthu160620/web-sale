@@ -70,8 +70,26 @@
 		}
         return status
     }
-    
+  
+ $('.btn-block[data-target="#myModal"]').on('click',function() {
+        let sum = $('#sum').val();
+        if(sum<=0){
+            alert('Giỏ hàng trống. Không thể đặt hàng.');
+            return false;
+        }
 
+    })
+ function checkClassBtn(){
+    $('.form-control[name="quantity"]').each(function( index ) {
+        let valNum = $(this).val()
+        if(valNum<=1){
+            $(this).closest('.btn-group').find('.btn-down').attr('type','button').prop('disable',true)
+        }
+    });
+    
+ }
+
+checkClassBtn()
 </script> {{/section}}
 
 <div class="row product product-bottom">
@@ -101,7 +119,7 @@
                                 <a href="/product/detail/{{Product.ProID}}" class="effect-underline" style="color:black">{{Product.ProName}}</a>
                                 <form id="frmRemoveItem" method="post" action="/checkout/remove">
                                     <input name="ProId" value="{{Product.ProID}}" type="hidden">
-                                    <button type="summit" class="btn btn-danger removeItem mt-3" style="width:70px;height:30px">Xóa</button>
+                                    <button type="summit" class="btn btn-danger removeItem mt-3 delete" style="width:70px;height:30px">Xóa</button>
                                 </form>
                             </p>
                         </div>
@@ -181,3 +199,4 @@
         </div>
     </div>
 </div>
+

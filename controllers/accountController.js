@@ -136,19 +136,27 @@ router.get('/history', restrict, (req, res) => {
         }
         Promise.all(list_order).then(list => {
             var items = rows;
+            console.log('rows');
+            console.log(rows);
+            console.log('-----------------------------');
+            console.log('list');
+            console.log(list);
+            console.log('-----------------------------');
             for (let j = 0;j < rows.length; j++) {
                 var item = [];
                 list.forEach(element => {
                     for (let i = 0;i < element.length; i++) {
                         if (element[i].OrderID == rows[j].OrderID) {
-                            console.log(element[i])
                             item.push(element[i]);
                         }
                     }
                 })
                 items[j]['item'] = item;
-                items[j].OrderDate = items[j].OrderDate.getDate() + '/' + items[j].OrderDate.getMonth() + '/' + (items[j].OrderDate.getYear() + 1900); 
+                items[j].OrderDate = items[j].OrderDate.getDate() + '/' + (items[j].OrderDate.getMonth() +1) + '/' + (items[j].OrderDate.getYear() + 1900); 
             }
+            console.log('items');
+            console.log(items);
+            console.log('-----------------------------');
             res.render('account/history', {items: items});
         })
     })

@@ -1,7 +1,12 @@
 <form action="" method="POST" role="form">
 	<div class="form-group">
 		<input type="hidden" id="" name="CatId" value="{{CatId}}">	
-		<button type="submit" class="btn btn-danger">
+		<p>Bạn có chăc chắn muốn xóa?</p>
+		<a class="btn btn-outline-secondary viewlist" href="/admin/category" role="button">
+			<i class="fa fa-arrow-left" aria-hidden="true"></i>
+			View list
+		</a>
+		<button type="submit" class="btn btn-danger delete">
 			<i class="fa fa-times" aria-hidden="true"></i>
 			Delete
 		</button>

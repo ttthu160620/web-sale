@@ -6,7 +6,8 @@ exports.add = user => {
 }
 
 exports.login = user => {
-    var sql = `select * from users where f_Username = '${user.username}' and f_Password = '${user.password}'`;
+    var sql = `select * from users where BINARY f_Username = BINARY '${user.username}' and f_Password = '${user.password}'`;
+    //var sql = `select * from users`;
     return db.load(sql);
 }
 

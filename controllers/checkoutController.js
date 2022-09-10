@@ -4,8 +4,15 @@ productRepo = require('../repos/productRepo'),
 orderRepo = require('../repos/orderRepo');
 var router = express.Router();
 
+function checkAndCreateCart(req){
+	if(!req.session.cart){
+		req.session.cart = [];
+	}
+}
+
 router.get('/', (req, res) => {
 	var arr_p = [];
+	checkAndCreateCart(req);
 	for (var i = 0; i < req.session.cart.length; i++) {
         var cartItem = req.session.cart[i];
 		var p = productRepo.single(cartItem.ProId);
@@ -36,6 +43,7 @@ router.get('/', (req, res) => {
 });
     
 router.post('/add', (req, res) => {
+	checkAndCreateCart(req);
 	var item = {
 		ProId: req.body.proID,
 		Quantity: +req.body.quantity
@@ -44,6 +52,7 @@ router.post('/add', (req, res) => {
 	res.redirect('/checkout');
 });
 router.post('/addOne', (req, res) => {
+	checkAndCreateCart(req)
 	var item = {
 		ProId: req.body.proID,
 		Quantity: +1
@@ -60,6 +69,7 @@ router.post('/subOne', (req, res) => {
 	res.redirect('/checkout');
 });
 router.post('/remove', (req, res) => {
+	checkAndCreateCart(req)
 	cartRepo.remove(req.session.cart, req.body.ProId);
 	res.redirect(req.headers.referer);
 });
@@ -87,8 +97,8 @@ router.post('/billpay', (req, res) => {
 	}
 
     orderRepo.addbill(bill).then(row => {
-		orderRepo.getIDBill(bill.userID).then(row => {
-			var billid = row[row.length - 1].ID;
+		orderRepo.getOneIDBill(bill.userID).then(row => {
+			var billid = row[0].ID;
 			Promise.all(arr_p).then(result => {
 				for (var i = result.length - 1; i >= 0; i--) {
 					var pro = result[i];

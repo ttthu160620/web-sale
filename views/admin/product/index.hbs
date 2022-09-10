@@ -14,10 +14,10 @@
 			<td>{{ProName}}</td>
 			<td>{{Price}}</td>
 			<td class="text-right">
-				<a class="btn btn-danger" href="/admin/product/delete?id={{ProID}}" role="button">
+				<a class="btn btn-danger delete" href="/admin/product/delete?id={{ProID}}" role="button">
 					<i class="fa fa-trash" aria-hidden="true"></i>
 				</a>
-				<a class="btn btn-primary" href="/admin/product/edit?id={{ProID}}" role="button">
+				<a class="btn btn-primary edit" href="/admin/product/edit?id={{ProID}}" role="button">
 					<i class="fa fa-pencil" aria-hidden="true"></i>
 				</a>
 			</td>
@@ -26,5 +26,5 @@
 	</tbody>
 </table>
 <a class="btn btn-large btn-block btn-outline-success" href="/admin/product/add" role="button">
-	Thêm danh mục mới
+	Thêm sản phẩm mới
 </a>

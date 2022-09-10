@@ -45,6 +45,11 @@ exports.getIDBill = userID =>{
 
 }
 
+exports.getOneIDBill = userID =>{
+    var sql=`SELECT max(orders.OrderID) as ID FROM orders where UserID = '${userID}' `;
+    return db.load(sql);
+
+}
 
 exports.removeall = (cart) => {
     for (var i = cart.length - 1; i >= 0; i--) {
@@ -65,6 +70,6 @@ exports.add = (cart, item) => {
 }
 
 exports.loadByUser = userID => {
-    var sql = `select * from orders where UserID = ${userID}`;
+    var sql = `select * from orders where UserID = ${userID}  order by  OrderID desc `;
     return db.load(sql);
 }

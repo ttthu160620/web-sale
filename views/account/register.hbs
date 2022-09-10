@@ -5,7 +5,8 @@
 {{#if showError}}
 <div class="alert alert-success">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	<strong>Bạn đã đăng ký tài khoản thành công!</strong>  {{errorMsg}}
+	{{!-- <strong>Bạn đã đăng ký tài khoản thành công!</strong>  {{errorMsg}} --}}
+	<p>Bạn đã đăng ký tài khoản thành công!</p>
 </div>
 {{/if}}
 
@@ -33,7 +34,7 @@
 	function kiemTraDangKy() {
 		var emptyUsernameMessage = document.getElementById("emptyUsernameMessage");
 		var emptyPasswordMessage = document.getElementById("emptyPasswordMessage");
-		var invalidPasswordMessage = document.getElementById("invalidPasswordMessage");
+		//var invalidPasswordMessage = document.getElementById("invalidPasswordMessage");
 		var emptyCPwdMsg = document.getElementById("emptyCPwdMsg");
 		var invalidCPwdMsg = document.getElementById("invalidCPwdMsg");
 		var emptyNameMsg = document.getElementById("emptyNameMsg");
@@ -54,7 +55,8 @@
 
 		//password
 		if (frmDangKy.rawPWD.value == "") {
-			emptyPasswordMessage.style.display = "block";
+			emptyPasswordMessage.style.display = "block";			
+			invalidPasswordMessage.style.display = "none";
 			emptyPasswordMessage.style.color = "red";
 			emptyPasswordMessage.style.fontSize = "14px";
 			status= false;
@@ -67,6 +69,7 @@
 
 		if (frmDangKy.rawPWD.value.length < 6 && frmDangKy.rawPWD.value.length > 0 ) {
 			invalidPasswordMessage.style.display = "block";
+			emptyPasswordMessage.style.display = "none";
 			invalidPasswordMessage.style.color = "red";
 			invalidPasswordMessage.style.fontSize = "14px";
 			status= false;
@@ -129,10 +132,6 @@
 					status= false;
 				}
 		}
-
-		
-		
-
 		return status;
 	}
 </script>

@@ -78,6 +78,7 @@ exports.randomSameBrand = brandID => {
 
 exports.search = (key) => {
     var sql = "select * from products where ProName like '%" + `${key}` + "%'";
+    //var sql = "select * from products where ProName like '%" + `Balo Simplecarry K1 M` + "%'";
     return db.load(sql);
 }
 

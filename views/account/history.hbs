@@ -49,19 +49,22 @@
     </div>
     <div class="col-md-10 pr-5">
         {{#each items}}
-        <div class="border bg-white mb-2">
-            <div class="row mx-0 mb-0 bg-white">
+        <div class="border bg-white mb-2 order">
+            <div class="row mx-0 mb-0 bg-white date">
                 <div class="col-sm-6 ml-2 mt-2">
-                    <div class="font-weight-light">Đặt ngày {{OrderDate}}</div>
+                    <div class="font-weight-light orderDate">Đặt ngày {{OrderDate}}</div>
                 </div>
                 <div class="col-sm-5 font-weight-light text-right text-nowrap mt-3 ml-3">
-                    <a href="#">Chi tiết</a>
+                    <!--<a href="#">Chi tiết</a>-->
+                     <span class="text-right" style="font-weight: bold;">#{{OrderID}} | Tổng tiền: {{number_format Total}}
+                        <strong>đ</strong>
+                    </span>
                 </div>
                 <div class="col"></div>
             </div>
             <hr/>
             {{#each item}}
-            <div class="row">
+            <div class="row item">
                 <div class="col-3 text-center">
                     <a href="/product/detail/{{ProID}}">
                         <img class="img-fluid" src="/img/{{ProID}}/thumbnail.jpg" width="75%" height="75%">
@@ -71,12 +74,14 @@
                     <a href="/product/detail/{{ProID}}">{{ProName}}</a>
                 </div>
                 <div class="col-2 mt-5">
-                    <span class="text-right">{{number_format Price}}
-                        <strong>đ</strong>
+                    <span class="text-right">Số lượng: {{Quantity}}
+
                     </span>
                 </div>
                 <div class="col-3 mt-5">
-                    <span class="text-right">Số lượng: {{Amount}}</span>
+                    <span class="text-right">Giá tiền: {{number_format Price}}
+                        <strong>đ</strong>
+                    </span>
                 </div>
             </div>
             {{/each}}
